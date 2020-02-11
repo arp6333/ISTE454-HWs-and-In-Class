@@ -42,13 +42,18 @@ class HahaViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    @IBAction func stopSound(sender: UIButton) {
+        if player != nil {
+            player?.stop()
+        }
+    }
+    
     @IBAction func playSound(sender: UIButton) {
         if player != nil {
             player?.play()
             counter += 1
             label.text = "Ha Ha #\(counter)"
         }
-        
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         // Animate the button
         let shake = CABasicAnimation(keyPath: "position")

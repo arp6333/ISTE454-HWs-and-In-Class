@@ -34,6 +34,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-6q-RuO">
+                                <rect key="frame" x="210" y="130" width="184" height="138"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ralph_button.png"/>
+                                <connections>
+                                    <action selector="stopSoundWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y5f-y6-cg6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -55,5 +63,6 @@
     <resources>
         <image name="bart_button.png" width="43.373493194580078" height="43.373493194580078"/>
         <image name="nelson.png" width="420" height="310"/>
+        <image name="ralph_button.png" width="128" height="101"/>
     </resources>
 </document>
