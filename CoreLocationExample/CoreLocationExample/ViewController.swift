@@ -13,6 +13,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var location: CLLocation?
     
+    @IBOutlet weak var latitude: UILabel!
+    @IBOutlet weak var longitude: UILabel!
+    @IBOutlet weak var altitude: UILabel!
+    @IBOutlet weak var hAccuracy: UILabel!
+    @IBOutlet weak var vAccuracy: UILabel!
+    @IBOutlet weak var timeStamp: UILabel!
+    @IBOutlet weak var speed: UILabel!
+    @IBOutlet weak var course: UILabel!
+    
+    var geocoder = CLGeocoder()
+    //var placemark: CLPlacemark?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +42,37 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last
         print("\(location)")
+        
+        latitude.text = String(format: "%.4f", location!.coordinate.latitude)
+        longitude.text = String(format: "%.4f", location!.coordinate.longitude)
+        altitude.text = String(format: "%.4f", location!.altitude)
+        hAccuracy.text = String(format: "%.4f", location!.horizontalAccuracy)
+        vAccuracy.text = String(format: "%.4f", location!.verticalAccuracy)
+        timeStamp.text = "\(location!.timestamp)"
+        speed.text = String(format: "%.4f", location!.speed)
+        course.text = String(format: "%.4f", location!.course)
+        
+        locationManager.stopUpdatingLocation()
+        
+        // Reverse geocoding
+        geocoder.reverseGeocodeLocation(location!, completionHandler: {
+            (placemarks, error) -> Void in
+            print(self.location!)
+            
+            if error != nil {
+                print("Reverse geocoding failed: \(error!.localizedDescription)")
+                return
+            }
+            
+            if placemarks!.count > 0 {
+                let pm = placemarks!.last
+                let address = "\(pm!.subThoroughfare) \(pm!.thoroughfare)\n\(pm!.postalCode)\n\(pm!.locality)\n\(pm!.administrativeArea)\n\(pm!.country)"
+                print(address)
+            }
+            else {
+                print("Problem with data received from geocoder.")
+            }
+        })
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
